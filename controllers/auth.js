@@ -4,7 +4,7 @@ const asyncHandler = require("../middlewares/async");
 const User = require("../models/User");
 
 //@desc     Register user
-//@route    POST /api/v1/auth/register
+//@route    POST /api/auth/register
 //@accesss  Public
 exports.register = asyncHandler(async (req, res, next) => {
   const { email, password, name, phonenumber, address, age } = req.body;
@@ -28,7 +28,7 @@ exports.register = asyncHandler(async (req, res, next) => {
 });
 
 //@desc     Login user
-//@route    POST /api/v1/auth/Login
+//@route    POST /api/auth/login
 //@accesss  Public
 exports.login = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
@@ -64,7 +64,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 });
 
 //@desc     log user out
-//@route    POST /api/v1/auth/logout
+//@route    POST /api/auth/logout
 //@accesss  Private
 exports.logout = asyncHandler(async (req, res, next) => {
   res.cookie("token", "none", {
@@ -77,7 +77,7 @@ exports.logout = asyncHandler(async (req, res, next) => {
   });
 });
 //@desc     Get current Logged in user
-//@route    POST /api/v1/auth/me
+//@route    POST /api/auth/me
 //@accesss  Private
 exports.getMe = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id);

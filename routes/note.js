@@ -3,7 +3,6 @@ const router = express.Router();
 const {
   getNotes,
   getNote,
-
   createNote,
   updateNote,
   deleteNote,

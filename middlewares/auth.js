@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("./async");
 const ErrorResponse = require("..//utils/errorResponse");
-const Admin = require("../models/Admin");
+const Admin = require("../models/User");
 
 // Protect routes
 exports.protect = asyncHandler(async (req, res, next) => {
@@ -12,9 +12,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
     req.headers.authorization.startsWith("Bearer")
   ) {
     token = req.headers.authorization.split(" ")[1];
-  } else if (req.cookies.token) {
-    token = req.cookies.token;
-  }
+  } 
 
   // Make sure token exists
   if (!token) {
@@ -27,7 +25,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
 
     console.log(decoded);
 
-    req.admin = await Admin.findById(decoded.id);
+    req.user = await User.findById(decoded.id);
 
     next();
   } catch (err) {
